@@ -15,38 +15,40 @@ const render = require("./src/page-template.js");
 // Create an empty array to hold all employee objects
 const employees = [];
 
-
+function addManager(){
 inquirer.prompt([
     {
-        name: "Manager's Name",
+        name: "name",
         type: "input",
         message: "Enter your manager's name",
     },
     {
-        name: "ID",
+        name: "id",
         type: "input",
         message: "Please enter your manager's ID",
     },
     {
-        name: "Email",
+        name: "email",
         type: "input",
         message: "What is your manager's email address?",
     },
     {
-        name: "Office Number",
+        name: "officeNumber",
         type: "input",
         message: "What is your manager office number?",
     },
 ]).then(managerAnswers =>{
     const manager = new Manager(managerAnswers.name, managerAnswers.id, managerAnswers.email, managerAnswers.officeNumber);
     employees.push(manager);
+    addEmployee();
 })
+}
 
 // Define a function to prompt the user to add an engineer or intern or finish building the team
 function addEmployee() {
     inquirer.prompt([
         {
-            name: 'employeeType',
+            name: 'Role',
             type: 'list',
             message: 'What type of employee would you like to add?',
             choices: ['Engineer', 'Intern', 'Finish building the team'],
@@ -55,24 +57,24 @@ function addEmployee() {
         if (employeeTypeAnswer.employeeType === 'Engineer') {
             inquirer.prompt([
                 {
-                    name: 'Name',
+                    name: 'name',
                     type: 'input',
-                    message: "What is the engineer's name?",
+                    message: "What is your name?",
                 },
                 {                    
-                    name: 'ID',
+                    name: 'id',
                     type: 'input',
-                    message: "What is the engineer's employee ID?",
+                    message: "What is your employee ID?",
                 },
                 {                    
-                    name: 'Email',
+                    name: 'email',
                     type: 'input',
-                    message: "What is the engineer's email address?",
+                    message: "What is your email address?",
                 },
                 {                    
-                    name: 'Github',
+                    name: 'github',
                     type: 'input',
-                    message: "What is the engineer's GitHub username?",
+                    message: "What is the your GitHub username?",
                 },
             ]).then(engineerAnswers => {
                 // Create a new Engineer object with the user's input and push it to the employees array
@@ -84,24 +86,24 @@ function addEmployee() {
         } else if (employeeTypeAnswer.employeeType === 'Intern') {
             inquirer.prompt([
                 {                   
-                    name: 'Name',
+                    name: 'name',
                     type: 'input',
-                    message: "What is the intern's name?",
+                    message: "What is your name?",
                 },
                 {                   
-                    name: 'ID',
+                    name: 'id',
                     type: 'input',
-                    message: "What is the intern's employee ID?",
+                    message: "What is your employee ID?",
                 },
                 {                   
-                    name: 'Email',
+                    name: 'email',
                     type: 'input',
-                    message: "What is the intern's email address?",
+                    message: "What is your email address?",
                 },
                 {                   
-                    name: 'School',
+                    name: 'school',
                     type: 'input',
-                    message: "What is the intern's school?",
+                    message: "What is your school name?",
                 },
             ]).then(internAnswers => {
                 // Create a new Intern object with the user's input and push it to the employees array
@@ -125,8 +127,8 @@ function addEmployee() {
     });
 }
 
-// Call the addEmployee function to start prompting the user
-addEmployee();
+addManager();
+
 
 
     
